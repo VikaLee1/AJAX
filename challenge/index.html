@@ -39,19 +39,19 @@ button:hover {
           <h2 class="fw-bold mb-3">Registration Form</h2>
           <div class="text-center mb-3">
          
-       
+          <form id="form">
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
-                  <input type="text" name="fname" class="form-control" />
+                  <input type="text" name="fname"  id="fname" class="form-control" />
                   <label class="form-label" for="form3Example1">First name</label>
                   <span class="text-danger">  </span>
                 </div>
               </div>
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
-                  <input type="text"  name="lname" class="form-control" />
+                  <input type="text"  name="lname" id="lname" class="form-control" />
                   <label class="form-label" for="form3Example2">Last name</label>
                   <span class="text-danger"> </span>
                 </div>
@@ -62,22 +62,22 @@ button:hover {
 
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="email" name="email" class="form-control" />
+              <input type="email" name="email" id="email" class="form-control" />
               <label class="form-label" for="form3Example3">Email address</label>
               <span class="text-danger"> </span>
             </div>
 
             <!-- Password input -->
-            <div class="form-outline mb-4">
+            <!-- <div class="form-outline mb-4">
               <input type="password" name="pass" class="form-control" />
               <label class="form-label" for="form3Example4">Password</label>
               <span class="text-danger">  </span>
-            </div>
+            </div> -->
 
            
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-block mb-4 text-white" name="btn-signup" style="background: #733B36">
+            <button type="submit" class="btn btn-block mb-4 text-white" name="submit" id="submit" style="background: #733B36">
               Register
             </button>
            
@@ -90,6 +90,57 @@ button:hover {
 </section>
 
 <!-- Section: Design Block -->  
+
+<div id="content"></div>
+
+<script>
+  // i want this function to be called when i submit
+          document.getElementById("form").addEventListener("submit", loadDoc);
+        
+          function loadDoc(e) {
+          // stops the form from refreshing the page
+            e.preventDefault();
+
+            let fname=document.getElementById("fname").value;
+            let lname=document.getElementById("lname").value;
+            let email=document.getElementById("email").value;
+            
+            let params=`fname=${fname}&lname=${lname}&email=${email}`;
+
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.open("POST", "create.php");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            
+            xhttp.onload = function() {
+                if (this.status == 200) {
+                 
+                    console.log("user has been created");
+                    read();
+                }
+            };
+            // GET to bring the data from the database, post to create
+            // if I want to create then I use post, get will also work
+            
+            xhttp.send(params);
+        }
+      
+// to display the the created information
+        function read(e) {       
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", "read.php"); 
+            xhttp.onload = function() {
+                if (this.status == 200) {
+                 
+                    document.getElementById("content").innerHTML=this.responseText;
+                }
+            };
+            xhttp.send();
+          }
+          read();
+
+    </script>
 
 </body>
 </html>
