@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My favorite Songs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="content">
+        <h2>My favorite songs</h2>
+        <div id="content" class="row"></div>
+    </div>
+
+    <script>
+        function loadDoc() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                if (this.status == 200) {
+                    let song = this.responseXML.getElementsByTagName('song');
+                    let content = document.getElementById('content');
+                    for (let i = 0; i < song.length; i++) {
+                        content.innerHTML += `
+               <div class="card" style="width: 18rem;">
+  <img src="${song[i].getElementsByTagName('image')[0].childNodes[0].nodeValue}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">${song[i].getElementsByTagName('name')[0].childNodes[0].nodeValue}</h5>
+    <p class="card-text">Artist: ${song[i].getElementsByTagName('artist')[0].childNodes[0].nodeValue}</p>
+    <p class="card-text">Year of release: ${song[i].getElementsByTagName('year')[0].childNodes[0].nodeValue}</p>
+    <a href="${song[i].getElementsByTagName('link')[0].childNodes[0].nodeValue}" class="btn btn-primary">Listen</a>
+  </div>
+</div>
+               `
+                    }
+                }
+            };
+            xhttp.open("GET", "songs.xml");
+            xhttp.send();
+        }
+        loadDoc();
+    </script>
+
+</body>
+
+</html>

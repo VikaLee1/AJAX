@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<songs>
+    <song id="1">
+        <name>Fragile</name>
+        <artist>Sting</artist>
+        <year>1988</year>
+        <image>fragile.jpg</image>
+        <link>https://www.youtube.com/watch?v=lB6a-iD6ZOY</link>
+    </song>
+    <song id="2">
+        <name>Paraphernalia</name>  
+        <artist>Temple</artist>  
+        <year>2020</year> 
+        <image>paraphernalia.jpg</image>  
+        <link>https://www.youtube.com/watch?v=Jp44IRShKZQ</link>
+    </song>
+    <song id="3">
+        <name>Emerald Rush</name>   
+        <artist>Jon Hopkins</artist>
+        <year>2018</year>
+        <image>rush.jpg</image>
+        <link>https://www.youtube.com/watch?v=4sk0uDbM5lc</link>
+    </song>
+</songs>
